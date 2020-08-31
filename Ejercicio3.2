@@ -1,0 +1,27 @@
+package examen.ejercicio3;
+
+public class Frigorifico extends Electrodomestico {
+
+	private static final long serialVersionUID = 1L;
+	private boolean noFrost;
+	
+	public Frigorifico(float precio, float peso) {
+		super(precio, peso);
+		noFrost = false;
+	}
+
+	public Frigorifico(float precio, Color color, char consumo, float peso, boolean noFrost) {
+		super(precio, color, consumo, peso);
+		this.noFrost = noFrost;
+	}
+	
+	public boolean isNoFrost() {
+		return noFrost;
+	}
+
+	@Override
+	public String toString() {
+		return "Frigorifico " + super.toString() + "[noFrost=" + noFrost + "]";
+	}
+	
+}
