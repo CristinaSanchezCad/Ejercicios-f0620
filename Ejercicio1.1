@@ -1,0 +1,108 @@
+package examen.ejercicio1;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Random;
+
+public class CrearFicheroDePrueba {
+	
+	static Random r = new Random();
+	
+	public static void main(String[] args) {
+		ArrayList<Usuario> usuarios = new ArrayList<>();
+		BufferedReader in = null;
+		
+		try {
+			in = new BufferedReader(new InputStreamReader(new FileInputStream("res/usuarios.txt"), "utf-8"));
+			String nombre;
+			while ((nombre = in.readLine()) != null)
+				usuarios.add(crearUsuario(nombre));
+			crearFichero(usuarios, "res/mensajes.txt");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (in != null)
+				try {
+					in.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		}
+		
+	}
+	
+	static void crearFichero(ArrayList<Usuario> usuarios, String mensajes) {
+		BufferedReader in = null;
+		PrintWriter out = null;
+		try {
+			in = new BufferedReader(new InputStreamReader(new FileInputStream(mensajes), "utf-8"));
+			out = new PrintWriter(new OutputStreamWriter(new FileOutputStream("res/server.log"), "utf-8"));
+			String mensaje;
+			while ((mensaje = in.readLine()) != null) {
+				Usuario usuario = usuarios.get(r.nextInt(usuarios.size()));
+				out.println("IP=" + usuario.getIP() + ";mensaje=" + mensaje + ";usuario=" + usuario.getNombre());
+			}
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (out != null)
+				out.close();
+		}
+	}
+	
+	static String generarIP() {
+		return Integer.toString(r.nextInt(222) + 1) + "." + Integer.toString(r.nextInt(255) + 1) + "." + Integer.toString(r.nextInt(255) + 1) + "." + Integer.toString(r.nextInt(255) + 1);
+	}
+	
+	static Usuario crearUsuario(String nombre) {
+		int n = r.nextInt(2);
+		if (n == 0)
+			n = r.nextInt(50) + 1;
+		String [] listaIP = new String[n];
+		for (int i=0; i<n; i++)
+			listaIP[i] = generarIP();
+		return new Usuario(nombre, listaIP);
+	}
+	
+	static class Usuario {
+
+		Random r = new Random();
+		
+		private String nombre;
+		private String [] listaIP;
+		
+		public Usuario(String nombre, String [] listaIP) {
+			this.nombre = nombre;
+			this.listaIP = listaIP;
+		}
+		
+		public String getNombre() {
+			return nombre;
+		}
+		
+		public String getIP() {
+			if (listaIP.length < 0 )
+				System.out.println(nombre);
+			System.out.flush();
+			return listaIP[r.nextInt(listaIP.length)];
+		}
+		
+	}
+	
+}
