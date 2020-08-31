@@ -40,3 +40,26 @@ public class CompuestoQuimico extends ArrayList<String> implements Comparable<Co
 	
 	
 }
+
+
+
+/* Ejercicio 2 (3 puntos)
+En un fichero de texto se guardan datos de compuestos químicos a razón de uno por línea con el formato siguiente:
+nombre_del_compuesto: elemento_químico_1 elemento_químico_2 elemento_químico_3 ...
+Ejemplos:
+Hidróxido de sodio: Na O H
+Nitrato de potasio: K N O3
+Sulfato de cobre: Cu S O4
+Cloruro de sodio: Na Cl
+Escribe un programa que lea el contenido del fichero y almacene en un TreeSet los compuestos químicos, entendiendo por compuesto
+químico una colección de elementos químicos representados como cadenas y almacenados en el mismo orden en que se leen del fichero. Por
+tanto, se ha de definir una clase llamada CompuestoQuímico para representar compuestos químicos según las especificaciones siguientes:
+
+Tiene que extender la clase que corresponda del Java Collection Framework.
+Tiene que declarar un único atributo llamado nombre para almacenar el nombre del compuesto químico, cuyo valor se puede consultar, pero no modificar.
+Tiene que definir los constructores en correspondencia con los de la superclase.
+Tiene que redefinir el método toString para que retorne el resultado de concatenar el nombre del compuesto químico con lo que retorne la versión de dicho método definida en la superclase.
+Tiene que definir un orden natural para los compuestos químicos que utilice como criterio de ordenación el orden alfabético del nombre del compuesto.
+
+Una vez leído el contenido del fichero y almacenados los datos en la colección, muestra por pantalla todos los compuestos químicos sin
+realizar ningún tipo de iteración.  */
