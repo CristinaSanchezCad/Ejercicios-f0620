@@ -1,0 +1,22 @@
+package examen.ejercicio4;
+
+import java.util.Comparator;
+
+import examen.ejercicio3.Electrodomestico;
+
+public class ElectrodomesticosComparator implements Comparator<Electrodomestico> {
+
+	@Override
+	public int compare(Electrodomestico e1, Electrodomestico e2) {
+		int resultado = e1.getConsumo() - e2.getConsumo();
+		if (resultado == 0) {
+			if (e1.getPrecio() < e2.getPrecio())
+				resultado = -1;
+			else if (e1.getPrecio() < e2.getPrecio())
+				resultado = 1;
+			else resultado = 0;
+		}
+		return resultado;
+	}
+	
+}
