@@ -58,3 +58,13 @@ public class Ejercicio4 {
 	}
 
 }
+
+
+/* Ejercicio 4 (2 puntos)
+Define una clase que ponga a prueba en el método main las clases definidas en el ejercicio anterior realizando las acciones siguientes:
+
+Almacenar en un mismo ArrayList electrodomésticos de todos los tipos.
+Ordenar el ArrayList con el método sort(List<T> list) de la clase Collections.
+Almacenar en un fichero de texto el contenido del ArrayList ordenado a razón de un electrodoméstico por línea. Por cada electrodoméstico se almacenará en la línea correspondiente lo que retorne el método toString.
+Ordenar el ArrayList con el método sort(List<T> list, Comparator<? super T> c) de la clase Collections, utilizando como criterio de ordenación el consumo energético de mayor consumo a menor consumo y dentro de los que tienen igual consumo, el precio de mayor a menor.
+Almacenar en un fichero binario el ArrayList resultado de la ordenación del punto anterior. El almacenamiento en el fichero se realizará serializando de forma independiente cada uno de los electrodomésticos almacenados en el ArrayList. */
