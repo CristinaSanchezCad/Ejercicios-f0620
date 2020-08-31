@@ -3,3 +3,78 @@ package examen.ejercicio3;
 public enum Color {
 	BLANCO, NEGRO, ROJO, AZUL, GRIS
 }
+
+/* Ejercicio 3 (2 puntos)
+Crear una jerarquía de clases Java para representar los electrodomésticos que se venden en una tienda Online especializada en lavadoras,
+frigoríficos y televisiones. Todos los electrodomésticos comparten las siguientes características:
+
+Precio base con un valor por defecto de 100 €.
+Color, representado por un tipo enumerado que defina los valores BLANCO, NEGRO, ROJO, AZUL y GRIS. El valor por defecto será BLANCO.
+Consumo energético representados por una letra comprendida entre la A y la F. Su valor por defecto será la letra B.
+Peso en kg.
+Un precio final que se calcula aumentando el precio base en un porcentaje que dependerá del consumo y el peso según las tablas siguientes:
+
+
+
+CONSUMO
+PORCENTAJE
+
+PESO
+PORCENTAJE
+
+
+A
+30%
+
+Entre 0 y 19 kg
+5%
+
+
+B
+25%
+
+Entre 20 y 49 kg
+10%
+
+
+C
+20%
+
+Entre 50 y 79 kg
+15%
+
+
+D
+15%
+
+Más de 80 kg
+20%
+
+
+E
+10%
+
+
+F
+5%
+
+
+
+Todas las clases deben implementar o redefinir como mínimo los métodos siguientes:
+
+Constructores:
+
+Constructor con parámetros para inicializar precio y peso.
+Constructor con parámetros para inicializar todos los atributos.
+
+
+Getters y setters.
+Método toString.
+
+Las lavadoras se caracterizan por soportar una carga según modelo que puede ser de 4, 5, 6, 7, 8, 10, 11 o 13 kg. El valor por defecto para la
+carga será de 5 kg. Su precio final aumentará en un 10% si la capacidad de carga es mayor de 8 kg.
+Los frigoríficos pueden tener o no tener capacidad No Frost. Por defecto no la tendrán.
+Las televisiones se caracterizan por su tamaño en pulgadas y por el tipo de sintonizador (DVB-T o DVB-T2). Los valores por defecto serán 20
+pulgadas y DVB-T respectivamente.
+Se ha de definir un orden natural para todos los electrodomésticos que utilice como criterio de ordenación el tipo de electrodoméstico (orden
+alfabético) y dentro de cada tipo el precio de menor a mayor. */
