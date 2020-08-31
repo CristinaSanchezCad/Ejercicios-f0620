@@ -59,3 +59,35 @@ public class Ejercicio1 {
 	}
 	
 }
+
+/*Ejercicio 1 (3 puntos)
+Dado un fichero de texto en el que se almacena el log de mensajes enviados por una serie de usuarios
+a través de un determinado servidor, se pretende procesar los datos en él almacenados para obtener la
+siguiente información:
+
+Número de mensajes que envía cada usuario por cada IP desde la que se ha conectado.
+Número total de IPs desde las que ha enviado mensajes cada usuario.
+
+El fichero de texto consta de un número indeterminado de líneas y en cada una de ellas se almacena información de un mensaje enviado por
+un usuario desde una IP con el formato siguiente:
+IP=dirección_ip;mensaje=texto_del_mensaje;usuario=nombre_de_usuario
+Toda la información obtenida ha de quedar accesible a través de una única referencia a una estructura de datos dinámica. El
+programa finalizará mostrando en la consola la información obtenida con el formato siguiente:
+nombre_de_usuario (número_total_de_IPs):
+dirección_ip -> número_de_mensajes
+dirección_ip -> número_de_mensajes
+.
+.
+.
+nombre_de_usuario (número_total_de_IPs):
+dirección_ip -> número_de_mensajes
+dirección_ip -> número_de_mensajes
+.
+.
+.
+El problema se ha de resolver según las especificaciones siguientes:
+
+Se definirá una única clase llamada Ejercicio1 que solo contendrá el método main. No se permite la definición de clases adicionales.
+Se asume que el fichero de texto se ajusta al formato especificado y, por tanto, no es necesario realizar ningún tipo de comprobación para detectar errores de formato.
+Se asume que el texto de los mensajes en el fichero de texto no va a contener los caracteres ';' o '='.
+Es posible que antes y después de los caracteres ';' o '=' haya espacios en blanco que habrá que ignorar. */
