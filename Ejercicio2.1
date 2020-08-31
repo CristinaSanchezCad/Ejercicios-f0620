@@ -1,0 +1,39 @@
+package examen.ejercicio2;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.TreeSet;
+
+public class Ejercicio2 {
+
+	public static void main(String[] args) {
+		Set<CompuestoQuimico> compuestos = new TreeSet<>();
+		BufferedReader in = null;
+		try {
+			in = new BufferedReader(new FileReader("res/compuestos.txt"));
+			String linea;
+			while ((linea = in.readLine()) != null) {
+				String[] compuesto = linea.split(":");
+				compuestos.add(new CompuestoQuimico(compuesto[0].trim(), Arrays.asList(compuesto[1].trim().split("\\s+"))));
+			}
+			System.out.println(compuestos);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (in != null)
+				try {
+					in.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		}
+	}
+
+}
+
