@@ -1,0 +1,46 @@
+package examen.ejercicio3;
+
+public class Televisor extends Electrodomestico {
+
+	private static final long serialVersionUID = 1L;
+	public static final String DVBT = "DVB-T";
+	public static final String DVBT2 = "DVB-T2";
+	private int pulgadas;
+	private String sintonizador;
+
+	public Televisor(float precio, float peso) {
+		super(precio, peso);
+		pulgadas = 20;
+		sintonizador = DVBT;
+	}
+	
+	public Televisor(float precio, Color color, char consumo, float peso, int pulgadas, String sintonizador) {
+		super(precio, color, consumo, peso);
+		if (!sintonizador.equals(DVBT) && !sintonizador.equals(DVBT2))
+			throw new IllegalArgumentException(sintonizador + " no es un valor válido para el atributo sintonizador");
+		pulgadas = 20;
+		sintonizador = DVBT;
+	}
+
+	public int getPulgadas() {
+		return pulgadas;
+	}
+
+	public void setPulgadas(int pulgadas) {
+		this.pulgadas = pulgadas;
+	}
+
+	public String getSintonizador() {
+		return sintonizador;
+	}
+
+	public void setSintonizador(String sintonizador) {
+		this.sintonizador = sintonizador;
+	}
+
+	@Override
+	public String toString() {
+		return "Televisor " + super.toString() + "[pulgadas=" + pulgadas + ", sintonizador=" + sintonizador + "]";
+	}
+
+}
