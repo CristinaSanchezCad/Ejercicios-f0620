@@ -1,0 +1,72 @@
+package examen.ejercicio3;
+
+import java.io.Serializable;
+
+public abstract class Electrodomestico implements Comparable<Electrodomestico>, Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	private float precio;
+	private Color color;
+	private char consumo;
+	private float peso;
+	
+	public Electrodomestico(float precio, float peso) {
+		this.precio = precio;
+		color = Color.BLANCO;
+		consumo = 'B';
+		this.peso = peso;
+	}
+
+	public Electrodomestico(float precio, Color color, char consumo, float peso) {
+		if (consumo < 'A' || consumo > 'F')
+			throw new IllegalArgumentException(consumo + " no es un valor válido para el atributo consumo");
+		this.precio = precio;
+		this.color = color;
+		this.consumo = consumo;
+		this.peso = peso;
+	}
+	
+	public float getPrecioFinal() {
+		float precio = this.precio;
+		precio += this.precio * (1 + 0.30 - ((consumo - 'A') * 0.5));
+		if (peso <= 19)
+			precio += this.precio * 1.05;
+		else if (peso < 49)
+			precio += this.precio * 1.1;
+		else if (peso < 49)
+			precio += this.precio * 1.15;
+		else
+			precio += this.precio * 1.2;
+		return precio;
+	}
+
+	public float getPrecio() {
+		return precio;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public char getConsumo() {
+		return consumo;
+	}
+
+	public float getPeso() {
+		return peso;
+	}
+
+	@Override
+	public String toString() {
+		return "[precio=" + precio + ", color=" + color + ", consumo=" + consumo + ", peso=" + peso	+ "]";
+	}
+	
+	@Override
+	public int compareTo(Electrodomestico e) {
+		int resultado = getClass().getName().compareTo(e.getClass().getName());
+		if (resultado == 0)
+			resultado = precio < e.getPrecio() ? -1 : precio > e.getPrecio() ? 1 : 0;
+		return resultado;
+	}
+	
+}
