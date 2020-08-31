@@ -1,0 +1,30 @@
+package examen.ejercicio3;
+
+public class Lavadora extends Electrodomestico {
+
+	private static final long serialVersionUID = 1L;
+	private int carga;
+	
+	public Lavadora(float precio, float peso) {
+		super(precio, peso);
+		carga = 5;
+	}
+
+	public Lavadora(float precio, Color color, char consumo, float peso, int carga) {
+		super(precio, color, consumo, peso);
+		if (carga != 4 && carga != 5 && carga != 6 && carga != 7 && carga != 8 &&
+				carga != 10 && carga != 11 && carga != 13)
+			throw new IllegalArgumentException(carga + "no es un valor válido para el atributo carga");
+		this.carga = carga;
+	}
+
+	public int getCarga() {
+		return carga;
+	}
+
+	@Override
+	public String toString() {
+		return "Lavadora " + super.toString() + "[carga=" + carga + "]";
+	}
+
+}
