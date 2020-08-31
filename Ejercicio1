@@ -1,0 +1,61 @@
+package e.ejercicio1;
+
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class Ejercicio1 {
+
+	public static void main(String[] args) {
+		Map<String, Map<String, Integer>> info = new TreeMap<>();
+		BufferedReader in = null;
+		try {
+			in = new BufferedReader(new InputStreamReader(new FileInputStream("res/server.log"), "utf-8"));
+			Map<String, Integer> infoUsuario;
+			String linea;
+			while((linea = in.readLine()) != null) {
+				String [] tokens = linea.split(";");
+				String usuario = tokens[2].split("=")[1];
+				String ip = tokens[0].split("=")[1];
+				infoUsuario = info.get(usuario);
+				if (infoUsuario == null) {
+					infoUsuario = new HashMap<>();
+					info.put(usuario, infoUsuario);
+				}
+				Integer n = infoUsuario.get(ip);
+				if (n == null)
+					n = 1;
+				else
+					n++;
+				infoUsuario.put(ip, n);
+			}
+			for (var entry: info.entrySet()) {
+				infoUsuario = entry.getValue();
+				System.out.println(entry.getKey() + " (" + infoUsuario.size() + ")");
+				for (var ipInfo: infoUsuario.entrySet())
+					System.out.println("\t" + ipInfo.getKey() + " -> " + ipInfo.getValue());
+			}
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (in != null)
+				try {
+					in.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+		}
+	}
+	
+}
