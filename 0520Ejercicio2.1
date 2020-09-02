@@ -1,0 +1,75 @@
+package examen.ejercicio2;
+
+import java.util.ArrayList;
+import java.util.Date;
+
+public class Contratista extends Empleado {
+
+    private static final long serialVersionUID = 1L;
+    private final ArrayList<SociedadAnonima> empresas = new ArrayList<>();
+
+    public Contratista(String nombre, String apellidos, Date fechaContrato, float salario, String cuentaBancaria) {
+        super(nombre, apellidos, fechaContrato, salario, cuentaBancaria);
+    }
+
+    public void addEmpresa(SociedadAnonima sa) {
+        empresas.add(sa);
+    }
+	
+    public void removeEmpresa(SociedadAnonima sa) {
+        empresas.remove(sa);
+    }
+
+    public void removeEmpresa(int i) {
+        empresas.remove(i);
+    }
+    
+    public Empresa [] getEmpresas() {
+        return (Empresa []) empresas.toArray();
+}
+
+    @Override
+    public String toString() {
+        return String.format("Contratista [%s]", super.toString());
+    }
+
+    @Override
+    public void cobrar() {
+        System.out.printf("Ingreso %.2f € en concepto de salario del contratista %s - %tb\n",
+                getSalario(), getNombre() + " " + getApellidos(), new Date());
+    }
+
+    /*
+     * Generado por Eclipse
+     */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((empresas == null) ? 0 : empresas.hashCode());
+		return result;
+	}
+
+	/*
+     * Generado por Eclipse
+     */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Contratista other = (Contratista) obj;
+		if (empresas == null) {
+			if (other.empresas != null)
+				return false;
+		} else if (!empresas.equals(other.empresas))
+			return false;
+		return true;
+	}
+    
+    
+
+}
