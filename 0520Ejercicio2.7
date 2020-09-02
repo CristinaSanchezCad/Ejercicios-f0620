@@ -1,0 +1,26 @@
+package examen.ejercicio2;
+
+public class SalarioException extends RuntimeException {
+
+    private static final long serialVersionUID = 1L;
+
+	public SalarioException() {
+    }
+
+    public SalarioException(String message) {
+        super(message);
+    }
+
+    public SalarioException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public SalarioException(Throwable cause) {
+        super(cause);
+    }
+
+    public SalarioException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
+    }
+    
+}
