@@ -1,0 +1,58 @@
+package examen.ejercicio2;
+
+import java.util.ArrayList;
+
+public class SociedadAnonima extends Empresa {
+
+    private static final long serialVersionUID = 1L;
+    private final ArrayList<String> especialidades = new ArrayList<>();
+    
+    public SociedadAnonima(String nombre) {
+	super(nombre);
+    }
+
+    public void addEspecialidad(String especialidad) {
+	especialidades.add(especialidad);
+    }
+
+    public void removeEspecialidad(String especialidad) {
+	especialidades.remove(especialidad);
+    }
+
+    @Override
+    public String toString() {
+	return String.format("Sociedad Anonima [%s] Especialidades %s", super.toString(), especialidades.toString());
+    }
+
+    /*
+     * Generado por Eclipse
+     */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((especialidades == null) ? 0 : especialidades.hashCode());
+		return result;
+	}
+
+	/*
+     * Generado por Eclipse
+     */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SociedadAnonima other = (SociedadAnonima) obj;
+		if (especialidades == null) {
+			if (other.especialidades != null)
+				return false;
+		} else if (!especialidades.equals(other.especialidades))
+			return false;
+		return true;
+	}
+	
+}
