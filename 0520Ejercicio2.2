@@ -1,0 +1,118 @@
+package examen.ejercicio2;
+
+import java.io.Serializable;
+import java.util.Date;
+
+public abstract class Empleado implements Remunerable, Comparable<Empleado>, Serializable {
+	
+    private static final long serialVersionUID = 1L;
+    private String nombre;
+    private String apellidos;
+    private Date fechaContrato;
+    private float salario;
+    private String cuentaBancaria;
+
+    public Empleado(String nombre, String apellidos, Date fechaContrato, float salario, String cuentaBancaria) {
+        setSalario(salario);
+        this.nombre = nombre;
+	this.apellidos = apellidos;
+	this.fechaContrato = fechaContrato;
+	this.cuentaBancaria = cuentaBancaria;
+    }
+
+    public float getSalario() {
+    	return salario;
+    }
+
+    public void setSalario(float salario) {
+        if (salario < 0)
+            throw new SalarioException();
+    	this.salario = salario;
+    }
+
+    public String getCuentaBancaria() {
+        return cuentaBancaria;
+    }
+
+    public void setCuentaBancaria(String cuentaBancaria) {
+	this.cuentaBancaria = cuentaBancaria;
+    }
+
+    public String getNombre() {
+	return nombre;
+    }
+
+    public String getApellidos() {
+	return apellidos;
+    }
+
+    public Date getFechaContrato() {
+	return fechaContrato;
+    }
+
+    @Override
+    public String toString() {
+	return nombre + " " + apellidos + " - " + fechaContrato + " - " + salario + " - " + cuentaBancaria;
+    }
+	
+    @Override
+    public final int compareTo(Empleado e) {
+    	int c = apellidos.compareTo(e.apellidos);
+	return c == 0 ? nombre.compareTo(e.nombre) : c;
+    }
+
+    /*
+     * Generado por Eclipse
+     */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((apellidos == null) ? 0 : apellidos.hashCode());
+		result = prime * result + ((cuentaBancaria == null) ? 0 : cuentaBancaria.hashCode());
+		result = prime * result + ((fechaContrato == null) ? 0 : fechaContrato.hashCode());
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		result = prime * result + Float.floatToIntBits(salario);
+		return result;
+	}
+
+	/*
+     * Generado por Eclipse
+     */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Empleado other = (Empleado) obj;
+		if (apellidos == null) {
+			if (other.apellidos != null)
+				return false;
+		} else if (!apellidos.equals(other.apellidos))
+			return false;
+		if (cuentaBancaria == null) {
+			if (other.cuentaBancaria != null)
+				return false;
+		} else if (!cuentaBancaria.equals(other.cuentaBancaria))
+			return false;
+		if (fechaContrato == null) {
+			if (other.fechaContrato != null)
+				return false;
+		} else if (!fechaContrato.equals(other.fechaContrato))
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		if (Float.floatToIntBits(salario) != Float.floatToIntBits(other.salario))
+			return false;
+		return true;
+	}
+    
+    
+    
+}
