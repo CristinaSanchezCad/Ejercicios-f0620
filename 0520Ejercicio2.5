@@ -1,0 +1,93 @@
+package examen.ejercicio2;
+
+import java.util.Date;
+
+public class EmpresaServicios extends Empresa implements Remunerable {
+
+    private static final long serialVersionUID = 1L;
+    private String servicio;
+    private float importe;
+    private String cuenta;
+		
+    public EmpresaServicios(String nombre, String servicio, float importe, String cuenta) {
+        super(nombre);
+        setImporte(importe);
+        this.servicio = servicio;
+        this.importe = importe;
+        this.cuenta = cuenta;
+    }
+	
+    public String getServicio() {
+        return servicio;
+    }
+
+    public float getImporte() {
+        return importe;
+    }
+
+    public void setImporte(float importe) {
+        if (importe < 0)
+            throw new ImporteMensualException();
+	this.importe = importe;
+    }
+
+    public String getCuenta() {
+        return cuenta;
+    }
+
+    public void setCuenta(String cuenta) {
+	this.cuenta = cuenta;
+    }
+	
+    @Override
+    public String toString() {
+	return "Empresa de Servicios [servicio=" + servicio + ", importe=" + importe + ", cuenta=" + cuenta + "]";
+    }
+
+    @Override
+    public void cobrar() {
+	System.out.printf("Ingreso %.2f € en en concepto de %s - %tb\n",
+		importe, servicio, new Date());
+    }
+
+    /*
+     * Generado por Eclipse
+     */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((cuenta == null) ? 0 : cuenta.hashCode());
+		result = prime * result + Float.floatToIntBits(importe);
+		result = prime * result + ((servicio == null) ? 0 : servicio.hashCode());
+		return result;
+	}
+
+	/*
+     * Generado por Eclipse
+     */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		EmpresaServicios other = (EmpresaServicios) obj;
+		if (cuenta == null) {
+			if (other.cuenta != null)
+				return false;
+		} else if (!cuenta.equals(other.cuenta))
+			return false;
+		if (Float.floatToIntBits(importe) != Float.floatToIntBits(other.importe))
+			return false;
+		if (servicio == null) {
+			if (other.servicio != null)
+				return false;
+		} else if (!servicio.equals(other.servicio))
+			return false;
+		return true;
+	}
+    
+}
