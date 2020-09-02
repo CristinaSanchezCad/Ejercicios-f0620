@@ -1,0 +1,66 @@
+package examen.ejercicio1;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class CompuestosQuimicos {
+
+    public static void main(String[] args) {
+        Map<String, List<String>> compuestos = new TreeMap<>();
+        Set<String> elementos = new TreeSet<>();
+        BufferedReader in = null;
+        try {
+            in = new BufferedReader(new FileReader("res/compuestos.txt"));
+            String linea;
+            while ((linea = in.readLine()) != null) {
+                String[] compuesto = linea.split(":");
+                List<String> listaElementos = Arrays.asList(compuesto[1].trim().split("\\s+"));
+                compuestos.put(compuesto[0].trim(), listaElementos);
+                listaElementos.forEach(
+                        elemento -> elementos.add(elemento.split("\\d")[0]));
+            }
+
+            // Primera forma de iteración
+            Iterator<Entry<String, List<String>>> i = compuestos.entrySet().iterator();
+            while (i.hasNext()) {
+                Entry<String, List<String>> compuesto = i.next();
+                System.out.println(compuesto.getKey() + ": " + compuesto.getValue());
+            }
+
+            // Segunda forma de iteración (quitar comentarios para porbarla)
+//            for (Entry<String, List<String>> entry : compuestos.entrySet())
+//                System.out.println(entry.getKey() + ": " + entry.getValue());
+
+            // Tercera forma de iteración (quitar comentarios para porbarla)
+//            compuestos.entrySet().forEach(
+//            		entry -> System.out.println(entry.getKey() + ": " + entry.getValue()));
+
+            System.out.println(elementos);
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(CompuestosQuimicos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(CompuestosQuimicos.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (in != null)
+                try {
+                in.close();
+            } catch (IOException ex) {
+                Logger.getLogger(CompuestosQuimicos.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+}
