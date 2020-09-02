@@ -1,0 +1,110 @@
+package examen.ejercicio3;
+
+import examen.ejercicio2.Asalariado;
+import examen.ejercicio2.Contratista;
+import examen.ejercicio2.Empleado;
+import examen.ejercicio2.EmpresaServicios;
+import examen.ejercicio2.Remunerable;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.LinkedList;
+
+public class Ejercicio3 {
+    
+    public static void main(String[] args) {
+        ArrayList<Remunerable> remunerables = new ArrayList<>();
+        remunerables.add(new Asalariado("Hugo", "Fernández", new Date(), 1000, "1", "Ventas"));
+        remunerables.add(new Contratista("Elena", "García", new Date(), 45000, "2"));
+        remunerables.add(new EmpresaServicios("Telefónica", "telefonía", 1200, "3"));
+        Iterator<Remunerable> i = remunerables.iterator();
+        Remunerable r;
+        while (i.hasNext()) {
+            r = i.next();
+            r.cobrar();
+        }
+        LinkedList<Empleado> empleados = new LinkedList<>();
+        empleados.add((Empleado) remunerables.get(0));
+        empleados.add((Empleado) remunerables.get(1));
+        empleados.add(new Contratista("Fernando", "Alvarez", new Date(), 45000, "4"));
+        Collections.sort(empleados);
+        System.out.println(empleados);
+        Collections.sort(empleados, new EmpleadoComparator());
+        System.out.println(empleados);
+        guardarRemunerables(remunerables, "res/remunerables.dat");
+        leerRemunerables("res/remunerables.dat").forEach(remunerable -> System.out.println(remunerable));
+        guardarEmpleados(empleados, "res/empleados.txt");
+    }
+    
+    static void guardarRemunerables(ArrayList<Remunerable> remunerables, String path) {
+        ObjectOutputStream out = null;
+        try {
+            out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(path)));
+            Iterator<Remunerable> i = remunerables.iterator();
+            while (i.hasNext()) 
+                out.writeObject(i.next());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+           e.printStackTrace();
+        } finally {
+            if (out != null)
+                try {
+                    out.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+        }
+    }
+
+    static ArrayList<Remunerable> leerRemunerables(String path) {
+        ArrayList<Remunerable> remunerables = new ArrayList<>();
+        ObjectInputStream in = null;
+        try {
+            in = new ObjectInputStream(new BufferedInputStream(new FileInputStream(path)));
+            boolean eof = false;
+            while (!eof) {
+                try {
+                    remunerables.add((Remunerable) in.readObject());
+                } catch (EOFException e) {
+                    eof = true;
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (FileNotFoundException e) {
+        	e.printStackTrace();
+        } catch (IOException e) {
+        	e.printStackTrace();
+        }
+        return remunerables;
+    }
+    
+    static void guardarEmpleados(LinkedList<Empleado> empleados, String path) {
+        PrintWriter out = null;
+        try {
+            out = new PrintWriter(new FileWriter(path));
+            Iterator<Empleado> i = empleados.iterator();
+            while (i.hasNext())
+                out.println(i.next());
+        } catch (IOException e) {
+        	e.printStackTrace();
+        } finally {
+            if (out != null)
+                out.close();
+        }
+    }
+}
+
